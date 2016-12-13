@@ -1,5 +1,7 @@
 from maya import cmds
 
+#Created as part of a Udemy course https://www.udemy.com/python-for-maya
+
 SUFFIXES = {
     "mesh":"geo",
     "joint":"jnt",
