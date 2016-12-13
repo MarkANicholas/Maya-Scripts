@@ -1,5 +1,9 @@
 from maya import cmds
 
+
+#Created as part of a Udemy course https://www.udemy.com/python-for-maya
+
+
 class Gear(object):
     """
     This is a gear object that lest us create and modify a gear
