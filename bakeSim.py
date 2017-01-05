@@ -23,24 +23,32 @@ class bakeWindow(object):
 
         column = cmds.columnLayout()
 
+        cmds.text(label="")
         cmds.text(label="Runs all commands")
         cmds.button(label="Run all", command=self.runall)
-
+        cmds.text(label="")
+        cmds.text(label="_________________")
+        cmds.text(label="")
         cmds.text(label="Individual steps")
+        cmds.text(label="")
         cmds.text(label="Imports reference and detetes its namespace")
         cmds.button(label="Import References", command=self.delnme)
-
-        cmds.text(label="Bakes keys on selected object")
-        cmds.button(label="Bake Selected", command=self.bakeS)
+        cmds.text(label="")
+        #cmds.text(label="Bakes keys on selected object")
+        #cmds.button(label="Bake Selected", command=self.bakeS)
         cmds.text(label="Bakes joints on 'Old man' rig")
-        cmds.button(label="Bake Rig", command=self.bakeR)
-        cmds.text(label="Deletes controlers")
-        cmds.button(label="Delete Ctrls", command=self.delCtrl)
-        cmds.text(label="Exports selected")
-        cmds.button(label="Export Sel", command=self.exprtsel)
+        cmds.button(label="Bake old man Rig", command=self.bakeR)
+        cmds.text(label="")
+        cmds.text(label="Deletes controlers on old man rig")
+        cmds.button(label="Delete old man Ctrls", command=self.delCtrl)
+        cmds.text(label="")
+        #cmds.text(label="Exports selected")
+        #cmds.button(label="Export Sel", command=self.exprtsel)
         cmds.text(label="Exports old man rig")
         cmds.button(label="Export old man rig", command=self.exprtrig)
-
+        cmds.text(label="")
+        cmds.text(label="_________________")
+        cmds.text(label="")
         cmds.button(label="Close", command=self.close)
 
 
@@ -71,7 +79,7 @@ class bakeWindow(object):
             rFile = cmds.referenceQuery(i, f=True)
             cmds.file(rFile, importReference=True)
 
-    def bakeR(self, joints, *args):
+    def bakeR(self, *args):
         print "baking keys of Old Man rig"
 
         # Gets timeline from scene
@@ -115,27 +123,22 @@ class bakeWindow(object):
             print "Nothing selected"
         else:
             print "Exporting Selection"
-        #cmds.select(self.joints)
-        #cmds.select(self.mesh)
-        #cmds.select(self.locators)
-        #cmds.exportEdits(exportSelected=True)
+            cmds.FBXExport('-f','G:/Users/_2016 Work_/Muro Rig_THOR/Export script test/export_test.fbx',['-s'])
+
 
     def exprtrig(self, *args):
 
 
         print "starting export"
+        #selects objexts to export
         xprtls = self.joints
         xprtls.extend(self.mesh)
         xprtls.extend(self.locators)
-
         cmds.select(xprtls)
+
         print xprtls
 
-        #my_filename = "cube2.fbx"
-        #my_folder = "C:/SomeFolder/scenes"
-        #full_file_path = join(my_folder, my_filename).replace('\\', '/')
-
-
+        #Export comand
         cmds.FBXExport('-f','G:/Users/_2016 Work_/Muro Rig_THOR/Export script test/export_test.fbx',['-s'])
         #mel.eval('FBXExport -f G:/Users/_2016 Work_/Muro Rig_THOR/Export script/export_test.fbx -s')
         #cmds.file('G:/Users/_2016 Work_/Muro Rig_THOR/Export script/export_test.fbx', exportSelected=True, type="FBX export")
@@ -143,7 +146,7 @@ class bakeWindow(object):
 
     def runall(self, *args):
         self.delnme()
-        self.bakeS()
+        self.bakeR()
         self.delCtrl()
         self.exprtrig()
 
